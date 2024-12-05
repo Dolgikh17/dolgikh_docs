@@ -13,8 +13,8 @@ const simplePlantUML = require("@akebifiky/remark-simple-plantuml");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
+  title: 'MapMates',
+  tagline: 'Hi, Polina!',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -53,9 +53,10 @@ const config = {
       ({
         docs: {
           sidebarPath: './sidebars.js',
-          routeBasePath: 'docs',
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/Dolgikht17/dolgikh_docs',
+            'https://github.com/dolgikh17/dolgikh_docs',
           remarkPlugins: [simplePlantUML], //подключаем плагин для plantuml
         },
         blog: false,
@@ -64,22 +65,21 @@ const config = {
         },
       }),
     ],
-    // подключаем плагин для OPENAPI
-    [
-      'redocusaurus',
-      {
-        specs: [
-          {
-            id: 'petstore',
-            spec: 'api_specs/openapi.yaml',
-          },
-        ],
-        theme: {
-          primaryColor: '#1890ff',
+  [
+    'redocusaurus',
+    {
+      specs: [
+        {
+          id: 'mapmates',
+          spec: 'api_specs/openapi.yaml',
         },
-      }
-    ],
+      ],
+      theme: {
+        primaryColor: '#1890ff',
+      },
+    }
   ],
+],
 
   
 
@@ -103,7 +103,7 @@ const config = {
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/dolgikh17',
             label: 'GitHub',
             position: 'right',
           },

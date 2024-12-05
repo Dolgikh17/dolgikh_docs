@@ -2,46 +2,25 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# MapMates
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Присоединяйся и создавай встречи!
 
-## Getting Started
+Приложение позволяет пользователям видеть друг друга на карте в реальном времени и организовывать встречи с указанием места, времени и дополнительных параметров. Пользователь может получить уведомление, если участник встречи не двигается к месту встречи вовремя.
 
-Get started by **creating a new site**.
+Основная ценность для бизнеса - за счет интеграции с ресторанами, кафе и другими площадками для встреч можно развивать партнерские программы и привлекать новых клиентов.
+****Основная ценность для пользователей - приложение упрощает процесс организации встреч и повышает уверенность в том, что все участники придут вовремя. Оно предлагает удобный способ координации с друзьями или коллегами в режиме реального времени и экономит время.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
 
-### What you'll need
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
 
-## Generate a new site
+## My github
+My github: [CLICK HERE!](https://github.com/Dolgikh17)
 
-Generate a new Docusaurus site using the **classic template**.
 
-The classic template will automatically be added to your project after you run the command:
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+### Тут что-то будет.
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
 
-The command also installs all necessary dependencies you need to run Docusaurus.
 
-## Start your site
 
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
