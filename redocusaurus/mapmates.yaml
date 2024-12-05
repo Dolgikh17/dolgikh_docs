@@ -1,0 +1,201 @@
+openapi: 3.0.3
+info:
+  title: MapMates App API
+  version: 1.0.0
+  description: >-
+    API для взаимодействия фронтенда с приложением для создания встреч и
+    бронирования мест
+servers:
+  - url: https://api.mapmates.com/v1
+paths:
+  /meetings:
+    get:
+      summary: Получить список встреч
+      description: Возвращает список встреч пользователя
+      operationId: getMeetings
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/PageSizeParam'
+      responses:
+        '200':
+          description: Список встреч успешно получен
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Meeting'
+        '401':
+          description: Авторизация не пройдена
+    post:
+      summary: Создать новую встречу
+      description: Создает новую встречу с параметрами
+      operationId: createMeeting
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMeeting'
+      responses:
+        '201':
+          description: Встреча успешно создана
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Meeting'
+        '400':
+          description: Неверные параметры запроса
+        '401':
+          description: Авторизация не пройдена
+  /meetings/{meetingId}:
+    get:
+      summary: Получить информацию о встрече
+      description: Возвращает информацию о конкретной встрече
+      operationId: getMeetingById
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/MeetingIdParam'
+      responses:
+        '200':
+          description: Информация о встрече успешно получена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Meeting'
+        '401':
+          description: Авторизация не пройдена
+        '404':
+          description: Встреча не найдена
+    delete:
+      summary: Удалить встречу
+      description: Удаляет указанную встречу
+      operationId: deleteMeeting
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/MeetingIdParam'
+      responses:
+        '204':
+          description: Встреча успешно удалена
+        '401':
+          description: Авторизация не пройдена
+        '404':
+          description: Встреча не найдена
+  /friends:
+    get:
+      summary: Получить список друзей
+      description: >-
+        Возвращает список друзей пользователя, которых можно пригласить на
+        встречу
+      operationId: getFriends
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/PageSizeParam'
+      responses:
+        '200':
+          description: Список друзей успешно получен
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Friend'
+        '401':
+          description: Авторизация не пройдена
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    MeetingIdParam:
+      name: meetingId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Идентификатор встречи
+    PageParam:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+      description: Номер страницы
+    PageSizeParam:
+      name: pageSize
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+      description: Количество элементов на странице
+  schemas:
+    Meeting:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Уникальный идентификатор встречи
+        name:
+          type: string
+          description: Название встречи
+        location:
+          type: string
+          description: Место проведения встречи
+        time:
+          type: string
+          format: date-time
+          description: Время начала встречи
+        attendees:
+          type: array
+          items:
+            $ref: '#/components/schemas/Friend'
+          description: Список участников встречи
+    CreateMeeting:
+      type: object
+      required:
+        - name
+        - location
+        - time
+      properties:
+        name:
+          type: string
+          description: Название встречи
+        location:
+          type: string
+          description: Место проведения встречи
+        time:
+          type: string
+          format: date-time
+          description: Время начала встречи
+        friends:
+          type: array
+          items:
+            type: string
+          description: Идентификаторы друзей, которых необходимо пригласить
+    Friend:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Уникальный идентификатор друга
+        name:
+          type: string
+          description: Имя друга
+        status:
+          type: string
+          description: Статус друга
